@@ -1,13 +1,13 @@
 {
-  "name": "mattpocock",
+  "name": "imecoulter-skills",
   "owner": {
-    "name": "Matt Pocock",
-    "url": "https://www.aihero.dev"
+    "name": "imecoulter",
+    "url": "https://github.com/imecoulter"
   },
-  "description": "Matt Pocock's skills for real engineering, as an installable Claude Code plugin.",
+  "description": "imecoulter's fork of Matt Pocock's skills. Deviations are listed in DEVIATIONS.md.",
   "plugins": [
     {
-      "name": "mattpocock-skills",
+      "name": "imecoulter-skills",
       "source": "./",
       "description": "Matt Pocock's agent skills for real engineering — grilling, spec/ticket flows, TDD, code review, domain modelling and more.",
       "category": "engineering",
