@@ -10,6 +10,9 @@ This is imecoulter's fork of [mattpocock/skills](https://github.com/mattpocock/s
 
 - **`grilling`** — facts are looked up inline, not by dispatching a sub-agent.
 - **`code-review`** — the Standards and Spec passes run inline, one after the other, with each report written out in full before the next pass starts. That keeps the two axes separate without two parallel contexts.
+- **`improve-codebase-architecture`** — walks the codebase inline instead of through a sub-agent.
+- **`codebase-design`** (`DESIGN-IT-TWICE.md`) — the 3+ designs are written one after another, each in full and against only its own constraint, instead of by parallel sub-agents.
+- **`wayfinder`** — charting no longer fires a `/research` sub-agent per research ticket. It lists them, and each is resolved when I run `/research` on it.
 
 ## Plugin and marketplace renamed to `imecoulter-skills`
 
