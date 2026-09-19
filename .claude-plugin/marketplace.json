@@ -1,8 +1,8 @@
 {
   "name": "imecoulter-skills",
   "owner": {
-    "name": "Matt Pocock",
-    "url": "https://www.aihero.dev"
+    "name": "imecoulter",
+    "url": "https://github.com/imecoulter"
   },
   "description": "imecoulter's fork of Matt Pocock's skills. Deviations are listed in DEVIATIONS.md.",
   "plugins": [
