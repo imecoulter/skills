@@ -1,0 +1,38 @@
+name: Upstream watch
+
+on:
+  schedule:
+    - cron: "0 14 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Open an issue when upstream has a newer release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          base=$(tr -d '[:space:]' < .upstream-version)
+          latest=$(git ls-remote --tags --sort=-v:refname https://github.com/mattpocock/skills 'v*' \
+            | awk '{print $2}' | sed 's#refs/tags/##; s#\^{}##' | head -1)
+          echo "base=$base latest=$latest"
+          [ -z "$latest" ] && exit 0
+          [ "$latest" = "$base" ] && exit 0
+          newest=$(printf '%s\n%s\n' "$base" "$latest" | sort -V | tail -1)
+          [ "$newest" = "$base" ] && exit 0
+          title="Upstream released $latest"
+          if gh issue list --state all --search "\"$title\" in:title" --json title --jq '.[].title' | grep -qxF "$title"; then
+            exit 0
+          fi
+          gh issue create --title "$title" --body "mattpocock/skills tagged **$latest**; this fork is based on **$base**.
+
+          Compare: https://github.com/mattpocock/skills/compare/$base...$latest
+
+          To take it: merge the tag, walk \`DEVIATIONS.md\` and keep each entry whose reason still holds, then bump \`.upstream-version\` and the plugin version."
