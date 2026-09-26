@@ -1,8 +1,7 @@
 ---
 name: close
-description: Close the current session — finish what's outstanding, merge the session's changes to the default branch, sweep worktrees and branches, report.
+description: Close out the current session — finish outstanding work, run the repo's checks, merge the session's changes into the default branch, close their tickets, sweep worktrees and branches, and report what needs the user and what's next. Use when the user wants to close out, wrap up or end the session, says "open a PR and merge", "merge and end the session", or asks when they can move on to the next session.
 argument-hint: "Anything to leave open or handle specially?"
-disable-model-invocation: true
 ---
 
 Close the current session. Everything this session opened ends in one of two states: **landed** (done, merged into the default branch, swept) or **handed back** (named in the report with the reason and what the user must do). The session is closed when nothing is in neither state.
@@ -34,6 +33,8 @@ Done when every finish item is pushed or re-tagged.
 
 ## 3. Merge
 
+Before a branch is merged, run the repo's **definition of done** against it — its documented check command (e.g. `npm run check`, named in `docs/agents/git-workflow.md`, the coding standards or `AGENTS.md`), otherwise its typecheck and test suite. This is the gate that counts when PRs have no checks of their own. A failure in this session's work is a finish item: fix it and re-run. A check has passed only when you've seen its results; exit code 0 with no results shown is not a pass.
+
 Every **merge** branch goes into the default branch. Follow the repo's documented workflow (`docs/agents/git-workflow.md` or equivalent) if one exists; otherwise:
 
 - **Has a PR** → merge it through the PR.
@@ -42,15 +43,17 @@ Every **merge** branch goes into the default branch. Follow the repo's documente
 
 For a PR's checks:
 
-- **Green, or no checks configured** → merge.
+- **Green, or no checks configured** (with the definition of done passing) → merge.
 - **Pending** → wait for it (`gh pr checks --watch`, backgrounded when slow).
 - **Red** → leave it open and hand it back with the failing output.
 
 If the default branch has moved on and the branch conflicts, bring it up to date and resolve the conflicts (`/resolving-merge-conflicts`); hand back only a conflict whose resolution needs a decision the user hasn't made.
 
-Merge only through the PR with its checks intact — the user decides anything that would bypass them. Hand back only for: red checks, a required review or other branch protection the session can't satisfy, an unresolvable conflict, or the user's arguments saying to leave it open.
+Merge only through the PR with its checks intact — the user decides anything that would bypass them. Hand back only for: red checks or a definition of done you can't make pass, a required review or other branch protection the session can't satisfy, an unresolvable conflict, or the user's arguments saying to leave it open.
 
-Done when every merge branch's commits are on the default branch (`git log <default>..<branch>` is empty, after fetching) or the branch is handed back for one of the reasons above.
+Once a branch lands, close the tickets its work resolved: confirm a `Closes #<n>` in the PR closed its issue, and close any that didn't — on a local tracker, mark the ticket file done. A wayfinder ticket closes with its resolution comment, per `/wayfinder`.
+
+Done when every merge branch's commits are on the default branch (`git log <default>..<branch>` is empty, after fetching) or the branch is handed back for one of the reasons above, and every ticket this session resolved is closed.
 
 ## 4. Sweep
 
@@ -62,7 +65,8 @@ Done when `git worktree list` and `git branch` in each repo show nothing merged 
 
 ## 5. Report
 
-A few lines, no recap of the conversation:
+Lead with what the user has to act on. Keep it to this session, a line per item, no recap of the conversation, and drop any section that's empty:
 
-- **Landed** — what merged into the default branch, with PR links (or the merge commit when merged locally).
-- **Handed back** — each item, why, and what the user needs to do.
+- **⚠ Needs you** — first, whenever it isn't empty. Every item handed back, and anything that went wrong while closing (a check that failed, a sweep that refused, a merge you couldn't make): what it is, why, and the exact action the user should take.
+- **Landed** — what merged into the default branch, with PR links (or the merge commit when merged locally), and the tickets closed.
+- **Next** — whether it's safe to start the next session now: everything landed and each primary checkout clean on its default branch, or what still stands in the way. Then the next piece of work and the exact command to start it — the first frontier ticket on the wayfinder map or ticket set this session worked from (`/wayfinder <map>`, `/build #<n>`), or what the user said comes next. When it isn't clear, name the candidates rather than picking one.

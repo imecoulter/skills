@@ -1,0 +1,3 @@
+interface:
+  display_name: "Close"
+  short_description: "Land the session on main and say what's next"

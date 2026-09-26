@@ -25,6 +25,8 @@ The route most work travels. You have an idea and want it built.
 
    Either way, **`/build`** builds each issue by driving **`/tdd`** internally — one red-green slice at a time — then runs **`/code-review`**, a two-axis review (Standards + Spec) of the diff, and lands the work on the default branch through **`/close`**. It works in its own worktree, and it's model-invoked, so "build #42" in plain words reaches it. Reach for **`/tdd`** on its own when you just want to build a concrete behaviour test-first without a full spec, and **`/code-review`** on its own whenever you want to review a branch or PR against a fixed point.
 
+4. **`/close`** — end any session that changed something here. It merges the session's work into the default branch through a PR, closes the tickets it resolved, sweeps the worktrees, and says whether it's safe to start the next session and what to run. `/build` ends with it; after a wayfinder or grilling session, it lands the docs they wrote. Model-invoked, so "close this out" or "open a PR and merge" reaches it.
+
 ### Context hygiene
 
 Keep steps 1–3 in **one unbroken context window** — don't compact or clear until after `/to-tickets` — so the grilling, spec, and tickets all build on the same thinking. Each `/build` then starts fresh, working from the ticket.
