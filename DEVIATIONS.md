@@ -29,6 +29,8 @@ This is imecoulter's fork of [mattpocock/skills](https://github.com/mattpocock/s
 ## Changed skills
 
 - **`build`** — model-invoked; branches into a worktree when it starts on the default branch, runs the repo's definition of done, commits before `/code-review`, and ends by running `/close` so the work merges and its ticket closes. **Reason:** I ask for "inspect, implement, merge and close issue N" in plain words, which a user-invoked skill can't answer, and I kept finishing each build by hand.
+- **`wayfinder`** — each session lands what it wrote (ADRs, `CONTEXT.md`, research and prototype files) on the default branch with `/close`, and stops by naming the next frontier ticket and the command to take it. Research findings land on the default branch instead of a `research/<name>` branch. **Reason:** I ended a dozen wayfinder sessions with "commit and push so I can start the next one" and "which session next?", and the next session starts from `main`, so a decision left on a branch is invisible to it.
+- **`prototype`** — the prototype lands in the repo's prototypes folder on the default branch (never imported, built or deployed) instead of a never-merged `prototype/<name>` branch. **Reason:** every branch I open ends in a merged PR and gets swept, so a never-merged branch is exactly what `/close` would try to land or hand back, and a pointer to a branch breaks when the branch is deleted. Ante Up already works this way.
 
 ## Added skills
 

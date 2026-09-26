@@ -47,7 +47,7 @@ Every ticket carries a `wayfinder:<type>` label, and is either **[HITL](https://
 | --- | --- | --- | --- |
 | `grilling` | HITL | The default. The question can be settled by talking it through. | [grilling](https://aihero.dev/skills-grilling) plus [domain-modeling](https://aihero.dev/skills-domain-modeling), in a fresh session |
 | `prototype` | HITL | "How should this look" or "how should this behave" — a question talking cannot settle. | [prototype](https://aihero.dev/skills-prototype), with the built artifact linked from the ticket as an asset |
-| `research` | AFK | A fact outside the working directory is blocking a decision. | A [research](https://aihero.dev/skills-research) [subagent](https://www.aihero.dev/ai-coding-dictionary/subagent), fired at charting time and burned down in parallel on a `research/<name>` branch |
+| `research` | AFK | A fact outside the working directory is blocking a decision. | [research](https://aihero.dev/skills-research), one run per ticket, listed at charting time; the findings land as a file on main |
 | `task` | Either | Nothing to decide, but manual work blocks a decision — provisioning access, signing up for a service, moving data so its shape can be seen. | The agent alone where it can, otherwise a precise checklist for the human |
 
 `task` is the only type that *does* rather than decides, and it earns its place by unblocking a decision — never by delivering a piece of the destination. This is the type that goes wrong most often in practice: agents interpret it as an implementation step and start writing product code inside the map.
@@ -91,7 +91,7 @@ It is this skill, renamed to `wayfinder` in v1.1 and invoked as `/wayfinder`. "D
 - The destination is written down and agreed before a single ticket exists.
 - Every open ticket reads as a question. Any ticket that reads "build the X" is either mis-typed or belongs downstream of the map.
 - You can look at your tracker and see which tickets are takeable without opening the map — that is the frontier rendering itself through native blocking.
-- A session resolves one ticket, posts the answer as a resolution comment, closes it, and leaves one line on the map's *Decisions so far*. Then it stops.
+- A session resolves one ticket, posts the answer as a resolution comment, closes it, and leaves one line on the map's *Decisions so far*. It lands whatever it wrote on main through [close](https://aihero.dev/skills-close), then stops and names the next frontier ticket and the command to take it.
 - **Not yet specified** shrinks over time. A patch of fog that graduates into a ticket disappears from that section rather than living in both places.
 - When the opening breadth-first grill turns up no fog at all, the skill stops and tells you the effort is small enough to skip the map.
 - The session that finishes the map hands you toward a spec, not a pull request.
