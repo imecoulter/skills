@@ -4,12 +4,12 @@
     "name": "imecoulter",
     "url": "https://github.com/imecoulter"
   },
-  "description": "imecoulter's fork of Matt Pocock's skills. Deviations are listed in DEVIATIONS.md.",
+  "description": "Coulter Heiberger's agent skills.",
   "plugins": [
     {
       "name": "imecoulter-skills",
       "source": "./",
-      "description": "Matt Pocock's agent skills for real engineering — grilling, spec/ticket flows, TDD, code review, domain modelling and more.",
+      "description": "Coulter Heiberger's agent skills: plan by interview, build in a worktree, land on main, and say what's next.",
       "category": "engineering",
       "keywords": [
         "engineering",
