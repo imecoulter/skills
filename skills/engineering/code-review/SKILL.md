@@ -10,7 +10,7 @@ Two-axis review of the diff between `HEAD` and a fixed point the user supplies:
 
 Both axes run **inline, one after the other** — Standards first, then Spec — and each report is written out in full before the next pass starts, so one axis can't bleed into the other. Then this skill aggregates their findings. Only spawn sub-agents if the user asks for them.
 
-The issue tracker should have been provided to you — run `/setup-matt-pocock-skills` if `docs/agents/issue-tracker.md` is missing.
+The issue tracker should have been provided to you — run `/setup-imecoulter-skills` if `docs/agents/issue-tracker.md` is missing.
 
 ## Process
 

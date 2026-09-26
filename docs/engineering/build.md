@@ -24,9 +24,9 @@ If the plan lives only in the thread, say so when you invoke it, so the [model](
 
 ## Prerequisites
 
-`build` follows the repo's git workflow (`docs/agents/git-workflow.md`, written by [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills)). Without one, a run that starts on the default branch makes its own branch in a worktree before the first commit, so build work never lands on `main` except by merge.
+`build` follows the repo's git workflow (`docs/agents/git-workflow.md`, written by [setup-imecoulter-skills](https://aihero.dev/skills-setup-imecoulter-skills)). Without one, a run that starts on the default branch makes its own branch in a worktree before the first commit, so build work never lands on `main` except by merge.
 
-If the tickets came from [to-tickets](https://aihero.dev/skills-to-tickets), the tracker they live on was configured by [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills). `code-review` reads the same configuration to find the originating spec at close-out.
+If the tickets came from [to-tickets](https://aihero.dev/skills-to-tickets), the tracker they live on was configured by [setup-imecoulter-skills](https://aihero.dev/skills-setup-imecoulter-skills). `code-review` reads the same configuration to find the originating spec at close-out.
 
 ## What one run does
 

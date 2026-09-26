@@ -1,16 +1,17 @@
 ---
-name: setup-matt-pocock-skills
-description: Configure this repo for the engineering skills — set up its issue tracker, triage label vocabulary, and domain doc layout. Run once before first use of the other engineering skills.
+name: setup-imecoulter-skills
+description: Configure this repo for the engineering skills — set up its issue tracker, triage label vocabulary, domain doc layout, and git workflow with its definition of done. Run once before first use of the other engineering skills.
 disable-model-invocation: true
 ---
 
-# Setup Matt Pocock's Skills
+# Setup imecoulter skills
 
 Scaffold the per-repo configuration that the engineering skills assume:
 
 - **Issue tracker** — where issues live (GitHub by default; local markdown is also supported out of the box)
 - **Triage labels** — the strings used for the five canonical triage roles
 - **Domain docs** — where `CONTEXT.md` and ADRs live, and the consumer rules for reading them
+- **Git workflow** — how a branch lands on the default branch, and the **definition of done** that counts as green
 
 This is a prompt-driven skill, not a deterministic script. Explore, present what you found, confirm with the user, then write.
 
@@ -27,6 +28,9 @@ Look at the current repo to understand its starting state. Read whatever exists;
 - `docs/agents/` — does this skill's prior output already exist?
 - `.scratch/` — sign that a local-markdown issue tracker convention is already in use
 - Is the `triage` skill installed? (a `triage` skill folder alongside this one, or `triage` in your available skills.) This decides whether Section B runs at all.
+- `docs/agents/git-workflow.md`, and any branching or PR rules already in `AGENTS.md`/`CLAUDE.md`
+- The check commands — `package.json` scripts (`check`, `test`, `typecheck`, `lint`) or the repo's equivalent — and whether `.github/workflows/` runs anything on `pull_request`
+- Where the repo keeps research notes and prototypes, if anywhere (`docs/research/`, `prototypes/`)
 - Monorepo signals — a `pnpm-workspace.yaml`, a `workspaces` field in `package.json`, or a populated `packages/*` with its own `src/`. Present only in a genuinely large multi-package repo; their absence means single-context, which is almost every repo.
 
 ### 2. Present findings and ask
@@ -60,12 +64,20 @@ The defaults are the five canonical roles, each label string equal to its name: 
 
 Offer **multi-context** — a root `CONTEXT-MAP.md` pointing to per-context `CONTEXT.md` files — only when exploration found monorepo signals. Then confirm which layout they want.
 
+**Section D — Git workflow.** Recommend **worktree per branch, every branch lands by PR and merges on green**, then the sweep. Confirm three facts from exploration rather than asking cold:
+
+- The **definition of done** — the one command that says a change is finished (propose the existing `check` script, else typecheck + lint + test chained). If none exists, say so and propose adding one.
+- Whether PRs run checks. When they don't, the local definition of done *is* green — record that explicitly, because `/close` and `/build` gate merges on it.
+- Where research notes and prototypes land (default `docs/research/` and `prototypes/`).
+
+With no remote, landing is a local merge into the default branch instead of a PR; say so in the file.
+
 ### 3. Confirm and edit
 
 Show the user a draft of:
 
 - The `## Agent skills` block to add to whichever of `CLAUDE.md` / `AGENTS.md` is being edited (see step 4 for selection rules)
-- The contents of `docs/agents/issue-tracker.md`, `docs/agents/domain.md`, and `docs/agents/triage-labels.md` (the last only when `triage` is installed)
+- The contents of `docs/agents/issue-tracker.md`, `docs/agents/domain.md`, `docs/agents/git-workflow.md`, and `docs/agents/triage-labels.md` (the last only when `triage` is installed)
 
 Let them edit before writing.
 
@@ -97,6 +109,10 @@ The block:
 ### Domain docs
 
 [one-line summary of layout — "single-context" or "multi-context"]. See `docs/agents/domain.md`.
+
+### Git workflow
+
+Every branch gets its own worktree under `.claude/worktrees/`; the primary checkout stays on a clean `<default>`. Every branch lands by PR and merges on green, where green is `<check-command>`. See `docs/agents/git-workflow.md`.
 ```
 
 Include the `### Triage labels` sub-block, and write `docs/agents/triage-labels.md`, only when `triage` is installed and Section B ran. When it isn't, both are omitted.
@@ -108,6 +124,7 @@ Then write the docs files using the seed templates in this skill folder as a sta
 - [issue-tracker-local.md](./issue-tracker-local.md) — local-markdown issue tracker
 - [triage-labels.md](./triage-labels.md) — label mapping (only if `triage` is installed)
 - [domain.md](./domain.md) — domain doc consumer rules + layout
+- [git-workflow.md](./git-workflow.md) — worktree per branch, PR, merge on green, the sweep; fill in the definition of done and the placeholders. Add `.claude/worktrees/` to `.gitignore` if it isn't there.
 
 For "other" issue trackers, write `docs/agents/issue-tracker.md` from scratch using the user's description.
 
