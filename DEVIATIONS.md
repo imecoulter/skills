@@ -26,6 +26,10 @@ This is imecoulter's fork of [mattpocock/skills](https://github.com/mattpocock/s
 
 **Reason:** my own naming standard calls the build step `build`. The skill (`skills/engineering/build`), its docs page (`docs/engineering/build.md`), and `/implement` references across the skills and docs all move to `build`. Links to `aihero.dev/skills-implement` stay, since that is where upstream publishes the page. When merging an upstream release, re-apply the rename to any new `implement` references.
 
+## Changed skills
+
+- **`build`** — model-invoked; branches into a worktree when it starts on the default branch, runs the repo's definition of done, commits before `/code-review`, and ends by running `/close` so the work merges and its ticket closes. **Reason:** I ask for "inspect, implement, merge and close issue N" in plain words, which a user-invoked skill can't answer, and I kept finishing each build by hand.
+
 ## Added skills
 
 Skills that exist only in this fork. Upstream merges can't conflict with them, but check each release for an upstream skill that now covers the same ground.

@@ -1,12 +1,12 @@
 ## What it does
 
-`build` builds work that has already been decided. You point it at a [ticket](https://www.aihero.dev/ai-coding-dictionary/ticket), a [spec](https://www.aihero.dev/ai-coding-dictionary/spec), or the plan you just agreed in the conversation, and it writes the code, drives [tdd](https://aihero.dev/skills-tdd) at the seams, typechecks as it goes, runs [code-review](https://aihero.dev/skills-code-review) at the end, and commits to the current branch.
+`build` builds work that has already been decided. You point it at a [ticket](https://www.aihero.dev/ai-coding-dictionary/ticket), a [spec](https://www.aihero.dev/ai-coding-dictionary/spec), or the plan you just agreed in the conversation, and it writes the code, drives [tdd](https://aihero.dev/skills-tdd) at the seams, typechecks as it goes, runs [code-review](https://aihero.dev/skills-code-review) at the end, and lands the work on the default branch through [close](https://aihero.dev/skills-close).
 
-It never reopens the plan. There is no interview, no clarifying round, no proposal of a different approach. Whatever was settled upstream is the input, and the skill's whole job is to turn that into a commit. That is what separates it from typing "build this" at a fresh [agent](https://www.aihero.dev/ai-coding-dictionary/agent), which will happily redesign the work while it builds it.
+It never reopens the plan. There is no interview, no clarifying round, no proposal of a different approach. Whatever was settled upstream is the input, and the skill's whole job is to turn that into merged code. That is what separates it from typing "build this" at a fresh [agent](https://www.aihero.dev/ai-coding-dictionary/agent), which will happily redesign the work while it builds it.
 
 ## When to reach for it
 
-You invoke this by typing `/build` — the agent won't reach for it on its own. It ships with `disable-model-invocation: true`, so no other skill can call it either. Wherever [ask-matt](https://aihero.dev/skills-ask-matt) or [to-tickets](https://aihero.dev/skills-to-tickets) says "then `/build` per ticket", that is an instruction to you, not something the agent will do unprompted.
+Type `/build`, or the agent reaches for it automatically when you ask in plain words — "build #42", "implement issue 87 and merge it".
 
 Where the work currently lives decides whether this is the right skill:
 
@@ -20,11 +20,11 @@ Where the work currently lives decides whether this is the right skill:
 | One concrete behaviour you want test-first, with no spec | [tdd](https://aihero.dev/skills-tdd) directly |
 | Already built, and you want it checked | [code-review](https://aihero.dev/skills-code-review) directly |
 
-The same-session case is worth naming because the skill's own first line doesn't cover it. `SKILL.md` says "the spec or tickets", which nudges the [model](https://www.aihero.dev/ai-coding-dictionary/model) to go hunting for a file that doesn't exist. If the plan lives only in the thread, say so when you invoke it.
+If the plan lives only in the thread, say so when you invoke it, so the [model](https://www.aihero.dev/ai-coding-dictionary/model) doesn't go hunting for a spec file that doesn't exist.
 
 ## Prerequisites
 
-`build` commits to the branch you are on. It does not create one, and it does not ask. Check you are on the branch you want the work on before you start.
+`build` follows the repo's git workflow (`docs/agents/git-workflow.md`, written by [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills)). Without one, a run that starts on the default branch makes its own branch in a worktree before the first commit, so build work never lands on `main` except by merge.
 
 If the tickets came from [to-tickets](https://aihero.dev/skills-to-tickets), the tracker they live on was configured by [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills). `code-review` reads the same configuration to find the originating spec at close-out.
 
@@ -32,13 +32,13 @@ If the tickets came from [to-tickets](https://aihero.dev/skills-to-tickets), the
 
 A run is five beats, in order:
 
-1. Read the ticket or spec and work out the seams.
-2. Drive [tdd](https://aihero.dev/skills-tdd) at the pre-agreed seams, one red-green slice at a time.
-3. Typecheck often, run single test files as it goes.
-4. Run the full test suite once, at the end.
-5. Run [code-review](https://aihero.dev/skills-code-review), then commit to the current branch.
+1. Branch into a worktree, unless it's already on a work branch.
+2. Drive [tdd](https://aihero.dev/skills-tdd) at the pre-agreed seams, one red-green slice at a time, typechecking and running single test files as it goes.
+3. Run the repo's definition of done once, at the end — its check command, or the full suite.
+4. Commit, then run [code-review](https://aihero.dev/skills-code-review) and fix what it finds.
+5. Hand off to [close](https://aihero.dev/skills-close), which opens the PR, merges on green, closes the ticket and sweeps.
 
-One run covers one ticket. The tickets [to-tickets](https://aihero.dev/skills-to-tickets) produces are tracer-bullet vertical slices sized to fit a single fresh [context window](https://www.aihero.dev/ai-coding-dictionary/context-window), so the intended rhythm is: clear context, implement one ticket, commit, clear again. Each ticket is self-contained, which is what makes the previous ticket's context disposable.
+One run covers one ticket. The tickets [to-tickets](https://aihero.dev/skills-to-tickets) produces are tracer-bullet vertical slices sized to fit a single fresh [context window](https://www.aihero.dev/ai-coding-dictionary/context-window), so the intended rhythm is: clear context, build one ticket, merge, clear again. Each ticket is self-contained, which is what makes the previous ticket's context disposable.
 
 ## Pre-agreed seams
 
@@ -48,23 +48,23 @@ The word "pre-agreed" is doing real work, and it is also the skill's weakest joi
 
 ## Common questions
 
-**It finished, but my ticket is still open and the acceptance criteria are still unchecked.**
+**Does it close my ticket?**
 
-Correct, and expected. `build` has no completion step. It ends at the commit and never touches the work item, confirmed on GitHub Issues and on the local markdown tracker, so it is not a tracker integration problem. It also does not act on the findings `code-review` produced, and does not tick the `- [ ]` boxes on the originating issue. Close the ticket and reconcile the criteria yourself. This bites hardest on a dependency chain, because `to-tickets` defines the frontier as tickets whose blockers are all closed. If nothing gets closed, nothing ever becomes visibly unblocked.
+Yes, through the merge. The PR carries `Closes #<n>`, and [close](https://aihero.dev/skills-close) confirms the ticket is closed once the PR lands. That matters most on a dependency chain, because `to-tickets` defines the frontier as tickets whose blockers are all closed. If nothing gets closed, nothing ever becomes visibly unblocked.
 
 **Can I point it at all my tickets at once, or run several in parallel?**
 
-No. One invocation, one ticket. Batch dispatch across a ticket queue and [subagent](https://www.aihero.dev/ai-coding-dictionary/subagent) fan-out are both requested repeatedly, and neither exists. Running several `/build` sessions side by side in one checkout is worse than unsupported: one field report describes a `git commit --amend` in one session landing on another session's commit, a stash vanishing from `refs/stash`, and commits landing on the wrong branch, all in a single afternoon across three issues. The sessions share one working directory, one index, and one HEAD. Git worktrees are the community workaround, and note that `refs/stash` is shared across worktrees too, so worktrees alone do not fix the stash case. If you want parallelism today, you are assembling it yourself.
+One invocation, one ticket. Parallel is fine across sessions: each run works in its own worktree, so side-by-side `/build` sessions don't share an index or HEAD. [to-tickets](https://aihero.dev/skills-to-tickets) prints the tickets in waves, and every ticket in a wave can run in its own session. The git stash is still shared across worktrees, so no run should rely on it.
 
-**Can it open a pull request instead of committing?**
+**Can I stop it before it merges?**
 
-Not built in. It commits straight to the current branch, which several people find too eager: the code lands before they have had a chance to verify it works. There is no configuration flag and no PR mode. People override it in the invocation ("commit to a branch and open a PR") or by editing their local copy of the skill.
+Yes. Say so when you invoke it ("build #42, but leave the PR open"). It then stops after the review with the work committed on its branch.
 
 **`code-review` says it cannot see my changes.**
 
-`code-review` reviews `git diff <fixed-point>...HEAD`, which excludes staged and working-tree changes. `build` runs it before committing, so unless an interim commit already exists there is nothing in that diff to review. Multiple people have reported this and it is unfixed on both sides. Commit first, then review against the point you branched from.
+`code-review` reviews `git diff <fixed-point>...HEAD`, which excludes staged and working-tree changes. `build` commits before it reviews for exactly this reason; if you run the review by hand, commit first.
 
-Separately, some people deliberately do not want the review inside the run at all, because an agent reviewing the code it just wrote is biased toward its own solution. Running [code-review](https://aihero.dev/skills-code-review) in a fresh session against a fixed point is a legitimate alternative, and is the same reason that skill runs its two axes in separate sub-agents.
+Separately, some people deliberately do not want the review inside the run at all, because an agent reviewing the code it just wrote is biased toward its own solution. Running [code-review](https://aihero.dev/skills-code-review) in a fresh session against a fixed point is a legitimate alternative.
 
 **One ticket burned 150k tokens. Am I using it wrong?**
 
@@ -79,7 +79,7 @@ Probably the ticket is too big rather than the skill being misused. A run does c
 - The session opens by reading the ticket or spec and restating what it will build, rather than asking you what to build.
 - You can see an actual `/tdd` invocation in the trace, not just tests appearing in the diff.
 - Typechecks and single test files run repeatedly during the run, and the full suite runs once near the end.
-- The run reaches a commit on your current branch without you prompting it to carry on.
+- The run works in its own worktree and ends with a merged PR and a closed ticket, without you prompting it to carry on.
 - The diff is one ticket's worth of change: a vertical slice through every layer, not several tickets swept together.
 
 ## Where it fits
@@ -90,7 +90,7 @@ Probably the ticket is too big rather than the skill being misused. A run does c
 grill-with-docs → to-spec → to-tickets → build → code-review
 ```
 
-Its neighbours are [to-tickets](https://aihero.dev/skills-to-tickets), which produces the tickets it consumes and declares the blocking edges that decide their order; [tdd](https://aihero.dev/skills-tdd), which it drives internally at each seam; and [code-review](https://aihero.dev/skills-code-review), which it runs before committing. It sits downstream of the planning skills and trusts them. It does not re-validate the shape of what it was handed, so a badly-structured map or a horizontally-layered ticket gets built as written.
+Its neighbours are [to-tickets](https://aihero.dev/skills-to-tickets), which produces the tickets it consumes and declares the blocking edges that decide their order; [tdd](https://aihero.dev/skills-tdd), which it drives internally at each seam; [code-review](https://aihero.dev/skills-code-review), which it runs before landing; and [close](https://aihero.dev/skills-close), which lands it. It sits downstream of the planning skills and trusts them. It does not re-validate the shape of what it was handed, so a badly-structured map or a horizontally-layered ticket gets built as written.
 
 That trust is why [wayfinder](https://aihero.dev/skills-wayfinder) merges onto the chain at [to-spec](https://aihero.dev/skills-to-spec) rather than looping its map straight into `build`. Go straight to `build` from a map only when the effort turned out genuinely small.
 
