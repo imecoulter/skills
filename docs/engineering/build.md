@@ -16,7 +16,7 @@ Where the work currently lives decides whether this is the right skill:
 | A spec, not yet split up, and the build spans sessions | [to-tickets](https://aihero.dev/skills-to-tickets) first, then `/build` per ticket |
 | A spec, and the build is small | `/build` directly against the spec |
 | Only in the conversation you just had, and it's still small | `/build` right there, in the same window |
-| Not written down anywhere yet | [grill-with-docs](https://aihero.dev/skills-grill-with-docs), or [grill-me](https://aihero.dev/skills-grill-me) if there's no codebase |
+| Not written down anywhere yet | [grill](https://aihero.dev/skills-grill) |
 | One concrete behaviour you want test-first, with no spec | [tdd](https://aihero.dev/skills-tdd) directly |
 | Already built, and you want it checked | [code-review](https://aihero.dev/skills-code-review) directly |
 
@@ -87,7 +87,7 @@ Probably the ticket is too big rather than the skill being misused. A run does c
 `build` is the build step of the main chain, second from the end:
 
 ```txt
-grill-with-docs → to-spec → to-tickets → build → code-review
+grill → to-spec → to-tickets → build → code-review
 ```
 
 Its neighbours are [to-tickets](https://aihero.dev/skills-to-tickets), which produces the tickets it consumes and declares the blocking edges that decide their order; [tdd](https://aihero.dev/skills-tdd), which it drives internally at each seam; [code-review](https://aihero.dev/skills-code-review), which it runs before landing; and [close](https://aihero.dev/skills-close), which lands it. It sits downstream of the planning skills and trusts them. It does not re-validate the shape of what it was handed, so a badly-structured map or a horizontally-layered ticket gets built as written.

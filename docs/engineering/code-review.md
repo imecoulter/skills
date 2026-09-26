@@ -85,7 +85,7 @@ No. It diffs `<fixed-point>...HEAD`, three-dot, which is measured from the merge
 
 ## Where it fits
 
-`code-review` is the review step at the tail of the build chain — `grill-with-docs → to-spec → to-tickets → build → code-review` — and also stands alone on any branch or PR you point it at.
+`code-review` is the review step at the tail of the build chain — `grill → to-spec → to-tickets → build → code-review` — and also stands alone on any branch or PR you point it at.
 
 - [build](https://aihero.dev/skills-implement) is the closest neighbour: it drives the build and calls this skill as its own closing review before committing.
 - [to-spec](https://aihero.dev/skills-to-spec) and [to-tickets](https://aihero.dev/skills-to-tickets) produce the document the Spec axis checks against; a vague spec makes that axis vague.

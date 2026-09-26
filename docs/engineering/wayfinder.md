@@ -8,11 +8,11 @@ It plans, it does not do. Every ticket holds a question whose resolution is a de
 
 You invoke this by typing `/wayfinder` — the [agent](https://www.aihero.dev/ai-coding-dictionary/agent) won't reach for it on its own.
 
-It is the heaviest, densest flow in the set, so the trigger is narrow: the effort has to be genuinely larger than one agent session can hold, and the route to the destination has to be foggy. The split is a clean one: `/grill-with-docs` for single-session planning, `/wayfinder` for multi-session planning.
+It is the heaviest, densest flow in the set, so the trigger is narrow: the effort has to be genuinely larger than one agent session can hold, and the route to the destination has to be foggy. The split is a clean one: `/grill` for single-session planning, `/wayfinder` for multi-session planning.
 
 | What you have in front of you | What to run |
 | --- | --- |
-| A well-scoped feature you can settle in one sitting | [grill-me](https://aihero.dev/skills-grill-me), or [grill-with-docs](https://aihero.dev/skills-grill-with-docs) when there is a codebase |
+| A well-scoped feature you can settle in one sitting | [grill](https://aihero.dev/skills-grill) |
 | A greenfield project, or a build spanning many sessions, with the route still unclear | `/wayfinder` |
 | A thread where the deciding is already done | [to-spec](https://aihero.dev/skills-to-spec) — skip straight past the map |
 | A cleared wayfinder map | [to-spec](https://aihero.dev/skills-to-spec), then [to-tickets](https://aihero.dev/skills-to-tickets) and [build](https://aihero.dev/skills-implement) |
@@ -45,7 +45,7 @@ Every ticket carries a `wayfinder:<type>` label, and is either **[HITL](https://
 
 | Type | Mode | Reach for it when | Resolved by |
 | --- | --- | --- | --- |
-| `grilling` | HITL | The default. The question can be settled by talking it through. | [grilling](https://aihero.dev/skills-grilling) plus [domain-modeling](https://aihero.dev/skills-domain-modeling), in a fresh session |
+| `grilling` | HITL | The default. The question can be settled by talking it through. | [grill](https://aihero.dev/skills-grill), in a fresh session |
 | `prototype` | HITL | "How should this look" or "how should this behave" — a question talking cannot settle. | [prototype](https://aihero.dev/skills-prototype), with the built artifact linked from the ticket as an asset |
 | `research` | AFK | A fact outside the working directory is blocking a decision. | [research](https://aihero.dev/skills-research), one run per ticket, listed at charting time; the findings land as a file on main |
 | `task` | Either | Nothing to decide, but manual work blocks a decision — provisioning access, signing up for a service, moving data so its shape can be seen. | The agent alone where it can, otherwise a precise checklist for the human |
@@ -56,8 +56,8 @@ Research is the only exception to *one ticket per session*.
 
 ## Common questions
 
-**How is this different from `/grill-with-docs`? Which should I start with?**
-Session count, not project size. `/grill-with-docs` is single-session planning; wayfinder is multi-session planning. If you can hold the whole thing in one conversation, grilling is the cheaper and better tool, and wayfinder is genuinely slower and denser for that case. The community shorthand that has settled on it: wayfinder only makes sense if the work doesn't fit into a single session. This is by a distance the most-asked wayfinder question, and it keeps being asked because the descriptions do not tell you where your own task sits on that line — you have to judge the session count yourself.
+**How is this different from `/grill`? Which should I start with?**
+Session count, not project size. `/grill` is single-session planning; wayfinder is multi-session planning. If you can hold the whole thing in one conversation, grilling is the cheaper and better tool, and wayfinder is genuinely slower and denser for that case. The community shorthand that has settled on it: wayfinder only makes sense if the work doesn't fit into a single session. This is by a distance the most-asked wayfinder question, and it keeps being asked because the descriptions do not tell you where your own task sits on that line — you have to judge the session count yourself.
 
 **When it asks for the "destination", does it mean the end of this session or the end of everything?**
 The whole map — the destination of the entire map, not just the initial session. The question reads ambiguously because wayfinder is by definition a multi-session tool, so a session-scoped answer never makes sense. Typical destinations are a [spec](https://www.aihero.dev/ai-coding-dictionary/spec) to hand off, a decision to lock before planning starts, a proof of concept, or a change made in place like a data migration.
@@ -100,4 +100,4 @@ It is this skill, renamed to `wayfinder` in v1.1 and invoked as `/wayfinder`. "D
 
 `wayfinder` is a **situational on-ramp**, not the default front door. The grill-led idea → ship chain is still where most work starts; wayfinder is what you climb onto when the idea is too big to hold in one session, and it merges back onto that chain at [to-spec](https://aihero.dev/skills-to-spec), because a cleared map hands off rather than builds.
 
-Underneath, it is mostly other skills wearing wayfinder's scheduling: [grilling](https://aihero.dev/skills-grilling) and [domain-modeling](https://aihero.dev/skills-domain-modeling) resolve the default ticket type, [prototype](https://aihero.dev/skills-prototype) resolves the tickets that talking cannot, and [research](https://aihero.dev/skills-research) runs as a subagent so its reading never lands in your session. [handoff](https://aihero.dev/skills-handoff) is the bridge in and out — into a map from a conversation that outgrew itself, out of one when a side quest appears mid-session. For anything else, [ask-matt](https://aihero.dev/skills-ask-matt) routes over the whole set.
+Underneath, it is mostly other skills wearing wayfinder's scheduling: [grill](https://aihero.dev/skills-grill) resolves the default ticket type, [prototype](https://aihero.dev/skills-prototype) resolves the tickets that talking cannot, and [research](https://aihero.dev/skills-research) runs as a subagent so its reading never lands in your session. [handoff](https://aihero.dev/skills-handoff) is the bridge in and out — into a map from a conversation that outgrew itself, out of one when a side quest appears mid-session. For anything else, [ask-matt](https://aihero.dev/skills-ask-matt) routes over the whole set.

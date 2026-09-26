@@ -12,7 +12,7 @@ Reach for it when the build is too big for one agent [session](https://www.aiher
 
 | Where you are | What to run |
 | --- | --- |
-| You haven't decided anything yet | [grill-with-docs](https://aihero.dev/skills-grill-with-docs) first |
+| You haven't decided anything yet | [grill](https://aihero.dev/skills-grill) first |
 | Decided, and the work fits one [context window](https://www.aihero.dev/ai-coding-dictionary/context-window) | [build](https://aihero.dev/skills-implement) — skip the spec |
 | Decided, and the work spans several sessions | `/to-spec`, then [to-tickets](https://aihero.dev/skills-to-tickets) |
 | A [wayfinder](https://aihero.dev/skills-wayfinder) map has cleared | `/to-spec #<map_issue>` |
@@ -54,7 +54,7 @@ Mostly for the agent, and it reads that way — complete, dense, reference-heavy
 Nothing keeps it in sync, so in practice it is a snapshot of what you knew at that moment, and it goes stale the first time implementation teaches you something. Treat it as throwaway once the work ships. The artifacts meant to outlive it are your `CONTEXT.md` and your ADRs — if something learned during implementation deserves to last, it belongs there, not in an edited spec.
 
 **My work is a refactor or a module boundary, not a feature. Does the template fit?**
-Less well, and this is a known limitation. The template leans hard on user stories, which is the wrong shape for architectural work — you end up writing stories nobody asked for around decisions that are really about interfaces and invariants. Lean on the implementation-decisions and testing-decisions sections instead, and let the durable architectural calls land as ADRs via [grill-with-docs](https://aihero.dev/skills-grill-with-docs) rather than trying to make the spec carry them.
+Less well, and this is a known limitation. The template leans hard on user stories, which is the wrong shape for architectural work — you end up writing stories nobody asked for around decisions that are really about interfaces and invariants. Lean on the implementation-decisions and testing-decisions sections instead, and let the durable architectural calls land as ADRs via [grill](https://aihero.dev/skills-grill) rather than trying to make the spec carry them.
 
 **Will it check the tracker for related work, or cite the ADRs it's respecting?**
 No to both. It reads and respects the ADRs covering the area it touches, but it doesn't link them, and it doesn't search the tracker for overlapping issues before drafting — so a spec can quietly duplicate work someone already filed. Search the tracker yourself first if the area is busy.
@@ -75,7 +75,7 @@ Very large specs can outgrow what a tracker issue will serve back cleanly, and t
 `to-spec` is a step in the main build chain, and only on the multi-session branch of it:
 
 ```txt
-grill-with-docs → to-spec → to-tickets → build → code-review
+grill → to-spec → to-tickets → build → code-review
 ```
 
-Its neighbours upstream are [grill-with-docs](https://aihero.dev/skills-grill-with-docs), which does the deciding this skill only records, and [wayfinder](https://aihero.dev/skills-wayfinder), whose finished map merges onto the chain right here. Downstream, [to-tickets](https://aihero.dev/skills-to-tickets) cuts the spec into tracer-bullet tickets for [build](https://aihero.dev/skills-implement) to build. When you're unsure which skill or flow fits, [ask-matt](https://aihero.dev/skills-ask-matt) routes you.
+Its neighbours upstream are [grill](https://aihero.dev/skills-grill), which does the deciding this skill only records, and [wayfinder](https://aihero.dev/skills-wayfinder), whose finished map merges onto the chain right here. Downstream, [to-tickets](https://aihero.dev/skills-to-tickets) cuts the spec into tracer-bullet tickets for [build](https://aihero.dev/skills-implement) to build. When you're unsure which skill or flow fits, [ask-matt](https://aihero.dev/skills-ask-matt) routes you.
