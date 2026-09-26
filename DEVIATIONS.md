@@ -1,20 +1,24 @@
 # Deviations from upstream
 
-This is imecoulter's fork of [mattpocock/skills](https://github.com/mattpocock/skills), based on the tag in `.upstream-version`.
+These are my skills. They started as a fork of [mattpocock/skills](https://github.com/mattpocock/skills), based on the tag in `.upstream-version`, and upstream is now a source I pull from, not a line I stay close to.
 
-**The rule:** stay as close to upstream as possible. A change lands only with a named workflow reason — never just to save tokens. Each change gets one entry here and its own commit pointing at the entry. When merging an upstream release, walk this list: keep each entry whose reason still holds, drop the rest.
+**The rule:** a change lands with a named workflow reason, never just to save tokens. Each one gets an entry here and a commit pointing at it. When an upstream release lands, `upstream-watch.yml` opens an issue; walk the release and cherry-pick what's worth having, re-applying the renames below (`implement` → `build`, the grill skills → `grill`, `ask-matt` → `ask`, `setup-matt-pocock-skills` → `setup-imecoulter-skills`) to anything you take.
+
+## Rebranded as mine
+
+**Reason:** I'd rather the repo read as my own set than as a copy of someone else's. The plugin, marketplace, `package.json`, README and LICENSE name me (upstream's MIT notice stays, as the license requires); `ask-matt` is `ask`; docs pages link to each other with relative paths instead of `aihero.dev`, and drop the AI Coding Dictionary links. The install route is this repo's own marketplace.
 
 ## Inline by default
 
 **Reason:** I work on a Claude Pro plan. Every sub-agent starts cold and re-reads the repo's `AGENTS.md`, so an unrequested spawn costs a whole extra context. Work happens inline unless I ask for a sub-agent. `research` is the deliberate exception — backgrounded reading is its point.
 
-- **`grilling`** — facts are looked up inline, not by dispatching a sub-agent.
+- **`grill`** — facts are looked up inline, not by dispatching a sub-agent.
 - **`code-review`** — the Standards and Spec passes run inline, one after the other, with each report written out in full before the next pass starts. That keeps the two axes separate without two parallel contexts.
 - **`improve-codebase-architecture`** — walks the codebase inline instead of through a sub-agent.
 - **`codebase-design`** (`DESIGN-IT-TWICE.md`) — the 3+ designs are written one after another, each in full and against only its own constraint, instead of by parallel sub-agents.
 - **`wayfinder`** — charting no longer fires a `/research` sub-agent per research ticket. It lists them, and each is resolved when I run `/research` on it.
 
-## Plugin and marketplace renamed to `imecoulter-skills`
+## Plugin and marketplace named `imecoulter-skills`
 
 **Reason:** so it's obvious in any session which copy is loaded, and upstream can't quietly get installed alongside it and double every skill description. The plugin version carries an `-imecoulter.N` suffix so Claude Code sees each fork release as an update.
 

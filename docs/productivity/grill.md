@@ -8,14 +8,14 @@ It is **stateful**. A term lands in `CONTEXT.md` the moment it resolves, and a h
 
 ## When to reach for it
 
-Type `/grill`, or the [agent](https://www.aihero.dev/ai-coding-dictionary/agent) reaches for it when you ask to be grilled or to stress-test a plan. Other skills run it too: [wayfinder](https://aihero.dev/skills-wayfinder) for decision tickets, [triage](https://aihero.dev/skills-triage) for vague reports, [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) once you pick a candidate.
+Type `/grill`, or the agent reaches for it when you ask to be grilled or to stress-test a plan. Other skills run it too: [wayfinder](../engineering/wayfinder.md) for decision tickets, [triage](../engineering/triage.md) for vague reports, [improve-codebase-architecture](../engineering/improve-codebase-architecture.md) once you pick a candidate.
 
 | What you have | Reach for |
 | --- | --- |
 | A plan or change you can settle in one session | `grill` |
-| An effort too big to hold in one session | [wayfinder](https://aihero.dev/skills-wayfinder), which runs `grill` inside each decision ticket |
-| A question talking can't settle, like how something should look or feel | [prototype](https://aihero.dev/skills-prototype) |
-| A decision blocked on knowledge in someone else's head | [to-questionnaire](https://aihero.dev/skills-to-questionnaire) |
+| An effort too big to hold in one session | [wayfinder](../engineering/wayfinder.md), which runs `grill` inside each decision ticket |
+| A question talking can't settle, like how something should look or feel | [prototype](../engineering/prototype.md) |
+| A decision blocked on knowledge in someone else's head | [to-questionnaire](to-questionnaire.md) |
 
 ## Rounds, and who decides
 
@@ -33,7 +33,7 @@ Say "go with your recs" and it runs the whole session on its own recommendations
 | A decision that's hard to reverse, surprising without context, and a real trade-off | An ADR under `docs/adr/` |
 | Everything else you decided | The conversation only |
 
-The third row catches people out. Most decisions don't earn an ADR, so the bulk of what you agreed lives in the [context window](https://www.aihero.dev/ai-coding-dictionary/context-window). Hand that same conversation to [to-spec](https://aihero.dev/skills-to-spec) rather than clearing it, and land the files it wrote with [close](https://aihero.dev/skills-close).
+The third row catches people out. Most decisions don't earn an ADR, so the bulk of what you agreed lives in the context window. Hand that same conversation to [to-spec](../engineering/to-spec.md) rather than clearing it, and land the files it wrote with [close](close.md).
 
 ## Common questions
 
@@ -68,4 +68,4 @@ Usually nothing qualified: a change with no new vocabulary and no hard trade-off
 grill → to-spec → to-tickets → build → close
 ```
 
-It produces the shared understanding and settled vocabulary that [to-spec](https://aihero.dev/skills-to-spec) then writes up without interviewing you again. [domain-modeling](https://aihero.dev/skills-domain-modeling) is the glossary-and-ADR discipline it drives. [ask-matt](https://aihero.dev/skills-ask-matt) routes you when you're unsure which skill fits.
+It produces the shared understanding and settled vocabulary that [to-spec](../engineering/to-spec.md) then writes up without interviewing you again. [domain-modeling](../engineering/domain-modeling.md) is the glossary-and-ADR discipline it drives. [ask](../engineering/ask.md) routes you when you're unsure which skill fits.

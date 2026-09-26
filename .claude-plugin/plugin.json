@@ -1,12 +1,12 @@
 {
   "name": "imecoulter-skills",
-  "version": "1.2.3-imecoulter.4",
-  "description": "Matt Pocock's agent skills for real engineering — grilling, spec/ticket flows, TDD, code review, domain modelling and more. Plug-and-play, not vibe coding.",
+  "version": "1.2.3-imecoulter.5",
+  "description": "Coulter Heiberger's agent skills: plan by interview, build in a worktree, land on main, and say what's next. Grilling, spec and ticket flows, TDD, code review and domain modelling.",
   "author": {
-    "name": "Matt Pocock",
-    "url": "https://www.aihero.dev"
+    "name": "Coulter Heiberger",
+    "url": "https://github.com/imecoulter"
   },
-  "homepage": "https://www.aihero.dev/s/skills-newsletter",
+  "homepage": "https://github.com/imecoulter/skills",
   "repository": "https://github.com/imecoulter/skills",
   "license": "MIT",
   "keywords": [
@@ -19,7 +19,7 @@
     "productivity"
   ],
   "skills": [
-    "./skills/engineering/ask-matt",
+    "./skills/engineering/ask",
     "./skills/engineering/diagnosing-bugs",
     "./skills/engineering/triage",
     "./skills/engineering/improve-codebase-architecture",

@@ -11,8 +11,8 @@ Type `/close`, or the agent reaches for it when you say it in plain words: "clos
 | You want… | Reach for |
 | --- | --- |
 | The session's work merged, cleaned up, and a pointer to what's next | `close` |
-| To carry unfinished work into a fresh session instead | [handoff](https://aihero.dev/skills-handoff) |
-| A single ticket built and landed | [build](https://aihero.dev/skills-build), which ends by running `close` |
+| To carry unfinished work into a fresh session instead | [handoff](handoff.md) |
+| A single ticket built and landed | [build](../engineering/build.md), which ends by running `close` |
 
 ## The gate
 
@@ -45,4 +45,4 @@ When the **Next** line says it's safe: everything landed, and each primary check
 
 ## Where it fits
 
-`close` is the last step of any session that changed something. It's where [build](https://aihero.dev/skills-build) hands off, and where a [wayfinder](https://aihero.dev/skills-wayfinder) session lands the docs it wrote. Unlike [handoff](https://aihero.dev/skills-handoff), which carries work forward, `close` finishes it. [ask-matt](https://aihero.dev/skills-ask-matt) is the router over the whole set.
+`close` is the last step of any session that changed something. It's where [build](../engineering/build.md) hands off, and where a [wayfinder](../engineering/wayfinder.md) session lands the docs it wrote. Unlike [handoff](handoff.md), which carries work forward, `close` finishes it. [ask](../engineering/ask.md) is the router over the whole set.
