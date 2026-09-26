@@ -1,6 +1,6 @@
 {
   "name": "imecoulter-skills",
-  "version": "1.2.3-imecoulter.3",
+  "version": "1.2.3-imecoulter.4",
   "description": "Matt Pocock's agent skills for real engineering — grilling, spec/ticket flows, TDD, code review, domain modelling and more. Plug-and-play, not vibe coding.",
   "author": {
     "name": "Matt Pocock",
@@ -29,7 +29,7 @@
     "./skills/engineering/to-spec",
     "./skills/engineering/to-tickets",
     "./skills/engineering/wayfinder",
-    "./skills/engineering/implement",
+    "./skills/engineering/build",
     "./skills/engineering/prototype",
     "./skills/engineering/research",
     "./skills/engineering/domain-modeling",

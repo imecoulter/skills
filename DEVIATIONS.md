@@ -22,8 +22,12 @@ This is imecoulter's fork of [mattpocock/skills](https://github.com/mattpocock/s
 
 **Reason:** upstream's `release.yml` versions and tags with changesets, which this fork doesn't publish. `upstream-watch.yml` instead checks upstream's tags weekly and opens an issue when there's a release newer than `.upstream-version`. Nothing merges automatically.
 
+## `implement` renamed to `build`
+
+**Reason:** my own naming standard calls the build step `build`. The skill (`skills/engineering/build`), its docs page (`docs/engineering/build.md`), and `/implement` references across the skills and docs all move to `build`. Links to `aihero.dev/skills-implement` stay, since that is where upstream publishes the page. When merging an upstream release, re-apply the rename to any new `implement` references.
+
 ## Added skills
 
 Skills that exist only in this fork. Upstream merges can't conflict with them, but check each release for an upstream skill that now covers the same ground.
 
-- **`/close`** (`skills/productivity/close`) — closes a session: finish agreed work, merge what's green, sweep worktrees and branches, report what landed and what's handed back. **Reason:** my sessions end with the same loose ends every time (open PRs, worktrees, background tasks), and a user-invoked skill costs no context until I type it.
+- **`/close`** (`skills/productivity/close`) — closes a session: finish agreed work, merge the session's changes into the default branch (opening a PR when there isn't one), sweep worktrees and branches, report what landed and what's handed back. **Reason:** my sessions end with the same loose ends every time (open PRs, worktrees, background tasks), and a user-invoked skill costs no context until I type it.

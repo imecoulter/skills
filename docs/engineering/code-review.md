@@ -13,7 +13,7 @@ Type `/code-review`, or the agent reaches for it automatically when you ask to r
 | A diff exists and you want to know if it is built right *and* is the right thing | `code-review` |
 | You want bugs hunted in the diff — null paths, races, off-by-one | Claude Code's own built-in review, not this one (see the name clash below) |
 | Nothing is written yet and you want it written test-first | [tdd](https://aihero.dev/skills-tdd) |
-| A whole spec needs building, review included | [implement](https://aihero.dev/skills-implement), which calls this skill itself |
+| A whole spec needs building, review included | [build](https://aihero.dev/skills-implement), which calls this skill itself |
 | The whole codebase has drifted, not one diff | [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) |
 | Something is broken and you do not know why | [diagnosing-bugs](https://aihero.dev/skills-diagnosing-bugs) |
 
@@ -57,11 +57,11 @@ Known open bug, reproduced by several people and in more than one harness. The S
 
 **Should I run it in the same [session](https://www.aihero.dev/ai-coding-dictionary/session) that wrote the code?**
 
-Prefer a fresh one. As one reader put it: "Same context reviewing itself isn't review, it's confirmation bias with a slash command." The reviewing agent in the authoring session holds every assumption that shaped the code, which is exactly the context an independent reviewer would not have. This is also why people ask for [implement](https://aihero.dev/skills-implement) without its built-in review step — it runs the review inside the session that just wrote the diff. Invoking `/code-review` yourself from a clean session is the honest version.
+Prefer a fresh one. As one reader put it: "Same context reviewing itself isn't review, it's confirmation bias with a slash command." The reviewing agent in the authoring session holds every assumption that shaped the code, which is exactly the context an independent reviewer would not have. This is also why people ask for [build](https://aihero.dev/skills-implement) without its built-in review step — it runs the review inside the session that just wrote the diff. Invoking `/code-review` yourself from a clean session is the honest version.
 
 **After every ticket, or once at the end?**
 
-Both work, and the skill does not decide for you. Per-ticket keeps each diff small enough that the Spec axis has one clear spec to check against, which is the mode `implement` uses. Batching to the end of a branch catches interactions between tickets that the per-ticket passes each miss. If you are unsure, review per ticket and run one final pass against the branch point.
+Both work, and the skill does not decide for you. Per-ticket keeps each diff small enough that the Spec axis has one clear spec to check against, which is the mode `build` uses. Batching to the end of a branch catches interactions between tickets that the per-ticket passes each miss. If you are unsure, review per ticket and run one final pass against the branch point.
 
 **Can I trust the findings?**
 
@@ -73,7 +73,7 @@ Because fixes create new surface, and because the judgement-call half of the Sta
 
 **Does it review my uncommitted work?**
 
-No. It diffs `<fixed-point>...HEAD`, three-dot, which is measured from the merge-base and excludes staged and working-tree changes. If `implement` has not made an interim commit, the work about to be committed is invisible to the review. Commit first, then review, then amend or add a fixup.
+No. It diffs `<fixed-point>...HEAD`, three-dot, which is measured from the merge-base and excludes staged and working-tree changes. If `build` has not made an interim commit, the work about to be committed is invisible to the review. Commit first, then review, then amend or add a fixup.
 
 ## It's working if
 
@@ -85,9 +85,9 @@ No. It diffs `<fixed-point>...HEAD`, three-dot, which is measured from the merge
 
 ## Where it fits
 
-`code-review` is the review step at the tail of the build chain — `grill-with-docs → to-spec → to-tickets → implement → code-review` — and also stands alone on any branch or PR you point it at.
+`code-review` is the review step at the tail of the build chain — `grill-with-docs → to-spec → to-tickets → build → code-review` — and also stands alone on any branch or PR you point it at.
 
-- [implement](https://aihero.dev/skills-implement) is the closest neighbour: it drives the build and calls this skill as its own closing review before committing.
+- [build](https://aihero.dev/skills-implement) is the closest neighbour: it drives the build and calls this skill as its own closing review before committing.
 - [to-spec](https://aihero.dev/skills-to-spec) and [to-tickets](https://aihero.dev/skills-to-tickets) produce the document the Spec axis checks against; a vague spec makes that axis vague.
 - [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) is the whole-codebase counterpart — this skill only ever looks at one diff.
 
