@@ -1,7 +1,9 @@
 #!/usr/bin/env node
-// Copies package.json's version into .claude-plugin/plugin.json.
+// Syncs .claude-plugin/plugin.json to package.json's version, keeping the fork's
+// -imecoulter.<N> suffix (rule: DEVIATIONS.md). Writes -imecoulter.1 if absent.
 // Runs as part of `npm run version`, immediately after `changeset version`.
-// With --check it changes nothing and exits 1 if the two versions differ.
+// With --check it changes nothing and exits 1 unless the plugin version is
+// <package.json version>-imecoulter.<N>.
 
 import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -14,28 +16,37 @@ const { version } = JSON.parse(readFileSync(join(repo, "package.json"), "utf8"))
 const source = readFileSync(pluginPath, "utf8");
 const plugin = JSON.parse(source);
 
-if (plugin.version === version) {
-  console.log(`plugin.json version is ${version} — already in sync`);
-  process.exit(0);
-}
+const [, base, suffix] = plugin.version.match(/^(.*?)(-imecoulter\.[1-9]\d*)?$/);
+const expected = `${version}-imecoulter.<N>`;
 
 if (process.argv.includes("--check")) {
+  if (base === version && suffix) {
+    console.log(`plugin.json version ${plugin.version} matches ${expected}`);
+    process.exit(0);
+  }
   console.error(
-    `plugin.json version is ${plugin.version}, package.json is ${version}. Run \`node scripts/sync-plugin-version.mjs\`.`,
+    `plugin.json version is ${plugin.version}, package.json is ${version}. Expected ${expected} (N a positive integer). Run \`node scripts/sync-plugin-version.mjs\`.`,
   );
   process.exit(1);
+}
+
+const target = `${version}${suffix ?? "-imecoulter.1"}`;
+
+if (plugin.version === target) {
+  console.log(`plugin.json version is ${target} — already in sync`);
+  process.exit(0);
 }
 
 // Rewrite only the version line, to keep the key order and the formatting.
 const updated = source.replace(
   /("version"\s*:\s*")[^"]*(")/,
-  `$1${version}$2`,
+  `$1${target}$2`,
 );
 
-if (JSON.parse(updated).version !== version) {
+if (JSON.parse(updated).version !== target) {
   console.error(`Could not find a version field to replace in ${pluginPath}.`);
   process.exit(1);
 }
 
 writeFileSync(pluginPath, updated);
-console.log(`plugin.json version ${plugin.version} -> ${version}`);
+console.log(`plugin.json version ${plugin.version} -> ${target}`);
