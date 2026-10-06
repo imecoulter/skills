@@ -11,7 +11,7 @@ Type `/orchestrate`, or the agent reaches for it automatically before it launche
 | You have… | Reach for |
 | --- | --- |
 | One ready ticket | [build](build.md), inline |
-| A wave of two or more ready tickets | `orchestrate` — one run, a builder per ticket |
+| A wave of two or more ready tickets | `/imecoulter-skills:ticket-wave 12 13` — the saved workflow, a builder per ticket |
 | Two or more open PRs to check | `orchestrate` — PR sweep |
 | One hard bug, hypotheses ranked | [diagnosing-bugs](diagnosing-bugs.md) first; `orchestrate` tests independent hypotheses in parallel |
 | One research question | [research](research.md) |
@@ -33,6 +33,8 @@ Every agent names its **model**, because an agent that names none runs the sessi
 Failure moves a unit up one notch, on a re-run and never inside the script: a unit that skipped work gets more effort on the same model; a unit that was wrong despite full context gets the next model up. A second failure is reported as blocked.
 
 ## The announcement and the gates
+
+The ticket wave is already a saved workflow, `/imecoulter-skills:ticket-wave`, shipped with the plugin: pass the wave's ticket numbers, with `risky:` before any ticket in auth, money, data or migrations, and it returns one table for `/close`. The other recipes are written fresh for each run and piloted on one unit first.
 
 Nothing launches until you say "go" to a five-line announcement: the mode, each stage's model and effort, the agent count, a rough cost, and your usage. Before every launch it reads your 5-hour and weekly bars (the desktop app's usage tool, or the statusline cache) and applies the **budget gates**: at 70% no Opus stages and half the cap; at 85%, or a weekly bar at 70% with its reset more than a day out, no workflow at all.
 
