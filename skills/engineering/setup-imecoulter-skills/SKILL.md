@@ -69,6 +69,7 @@ Offer **multi-context** — a root `CONTEXT-MAP.md` pointing to per-context `CON
 - The **definition of done** — the one command that says a change is finished (propose the existing `check` script, else typecheck + lint + test chained). If none exists, say so and propose adding one.
 - Whether PRs run checks. When they don't, the local definition of done *is* green — record that explicitly, because `/close` and `/build` gate merges on it.
 - Where research notes and prototypes land (default `docs/research/` and `prototypes/`).
+- What a parallel wave (`/orchestrate`) needs to know: what a fresh worktree must run before the definition of done passes (e.g. `npm ci`, since `node_modules` isn't shared), and the **hotspot files** — the ones most tickets touch (a migrations sequence, a lexicon, a shared layout) — so tickets that share one go in different waves — and the **risky areas** (auth, money, data, migrations) whose tickets get an opus review before landing. Propose all three from exploration; say when worktree setup is heavy enough that waves should stay inline.
 
 With no remote, landing is a local merge into the default branch instead of a PR; say so in the file.
 

@@ -5,6 +5,8 @@ description: "Build a piece of work from a ticket, spec or agreed plan, in its o
 
 Build the work described by the user in the ticket, spec or agreed plan. Whatever was settled upstream is the input — don't reopen it.
 
+One ticket is one inline run. Two or more ready tickets are a wave: `/orchestrate` runs them as one workflow, each builder doing steps 1–4 here and stopping before merge.
+
 1. **Branch.** Follow the repo's git workflow (`docs/agents/git-workflow.md` or equivalent). Without one, if the checkout is on the default branch, create a branch in its own worktree before the first commit. Build work is never committed straight to the default branch.
 2. **Build.** Use /tdd where possible, at pre-agreed seams. Run typechecking regularly and single test files regularly.
 3. **Check.** Run the repo's definition of done once at the end — its documented check command (e.g. `npm run check`), otherwise the full test suite. A check has passed only when you've seen its results; exit code 0 with no results shown is not a pass.

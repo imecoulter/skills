@@ -68,9 +68,9 @@ Do NOT close or modify any parent issue.
 
 ### 6. Print the run order
 
-Group the published tickets into **waves**: wave 1 is every ticket with no blockers; wave N is every ticket whose blockers all sit in earlier waves. Tickets in the same wave can run in parallel, one session each; a wave starts once the one before it has merged.
+Group the published tickets into **waves**: wave 1 is every ticket with no blockers; wave N is every ticket whose blockers all sit in earlier waves. Tickets in the same wave can run in parallel; a wave starts once the one before it has merged and been pushed.
 
-Show it as a short table — wave, ticket (linked), what it builds, blocked by — followed by the command that starts each wave-1 ticket (`/build #<n>`). Leave the same table where the next session will find it: as a comment on the parent issue, or on a local tracker as `.scratch/<feature-slug>/README.md`.
+Show it as a short table — wave, ticket (linked), what it builds, blocked by — followed by the command that starts wave 1: `/build #<n>` when it holds one ticket, or "run wave 1" (one workflow run via `/orchestrate`) when it holds two or more. Leave the same table where the next session will find it: as a comment on the parent issue, or on a local tracker as `.scratch/<feature-slug>/README.md`.
 
 <local-ticket-template>
 

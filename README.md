@@ -44,12 +44,12 @@ Then, in each repo, run `/setup-imecoulter-skills` once. It records where issues
 
 1. **[`/grill`](./skills/productivity/grill/SKILL.md)** the idea. It asks a round of questions at a time, each with a recommended answer, and writes the settled vocabulary and hard decisions into `CONTEXT.md` and ADRs as it goes. Say "go with your recs" and it answers itself, then lists every decision for you to check.
 2. If the build spans sessions, **[`/to-spec`](./skills/engineering/to-spec/SKILL.md)** writes it up and **[`/to-tickets`](./skills/engineering/to-tickets/SKILL.md)** splits it into tickets, printed as waves you can run in parallel.
-3. **[`/build #n`](./skills/engineering/build/SKILL.md)**, one ticket per session. It branches into a worktree, works test-first, runs the checks and a review, then lands the ticket.
+3. **[`/build #n`](./skills/engineering/build/SKILL.md)**, one ticket per session. It branches into a worktree, works test-first, runs the checks and a review, then lands the ticket. A wave of two or more tickets runs as one workflow through **[`/orchestrate`](./skills/engineering/orchestrate/SKILL.md)**, a builder per ticket, landed together by one `/close`.
 4. **[`/close`](./skills/productivity/close/SKILL.md)** ends every session that changed something. It merges the work into `main` through a PR, closes the tickets, sweeps the worktrees, and tells you what needs you and what to run next.
 
 Too big to hold in one session? **[`/wayfinder`](./skills/engineering/wayfinder/SKILL.md)** charts it as a map of decision tickets first. Bug reports arriving from other people go through **[`/triage`](./skills/engineering/triage/SKILL.md)**. Not sure where you are? **[`/ask`](./skills/engineering/ask/SKILL.md)**.
 
-`build`, `close` and `grill` are model-invoked, so "build #42", "grill me on this" and "open a PR and merge" work in plain words.
+`build`, `close`, `grill` and `orchestrate` are model-invoked, so "build #42", "grill me on this", "open a PR and merge" and "run wave 2" work in plain words.
 
 ## Reference
 
@@ -81,6 +81,7 @@ Daily code work.
 - **[resolving-merge-conflicts](./skills/engineering/resolving-merge-conflicts/SKILL.md)** — Work through an in-progress git merge or rebase conflict hunk by hunk, resolving by intent traced to each side's primary source, then finish the operation — never `--abort`.
 - **[wizard](./skills/engineering/wizard/SKILL.md)** — Generate an interactive bash wizard that walks a human through steps only they can perform: provisioning infrastructure, setting up credentials or CI secrets, walking an unfamiliar third-party dashboard, or running a one-off migration or cutover.
 - **[build](./skills/engineering/build/SKILL.md)** — Build a ticket, spec or agreed plan in its own worktree, driving `/tdd` at pre-agreed seams and `/code-review` before landing it on the default branch through `/close`.
+- **[orchestrate](./skills/engineering/orchestrate/SKILL.md)** — Run AFK work as subagents or one dynamic workflow, with a named model and effort on every stage: ticket waves, PR sweeps, parallel bug hypotheses, refactor batches and research sweeps, under budget gates.
 
 ### Productivity
 

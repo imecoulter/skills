@@ -1,6 +1,6 @@
 {
   "name": "imecoulter-skills",
-  "version": "1.2.3-imecoulter.5",
+  "version": "1.2.3-imecoulter.6",
   "description": "Coulter Heiberger's agent skills: plan by interview, build in a worktree, land on main, and say what's next. Grilling, spec and ticket flows, TDD, code review and domain modelling.",
   "author": {
     "name": "Coulter Heiberger",
@@ -29,6 +29,7 @@
     "./skills/engineering/to-tickets",
     "./skills/engineering/wayfinder",
     "./skills/engineering/build",
+    "./skills/engineering/orchestrate",
     "./skills/engineering/prototype",
     "./skills/engineering/research",
     "./skills/engineering/domain-modeling",

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Orchestrate"
+  short_description: "Run AFK work as subagents or a workflow"

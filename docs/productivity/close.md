@@ -24,7 +24,7 @@ The report leads with what you have to act on and stays inside this session:
 
 - **⚠ Needs you** — anything handed back or anything that went wrong while closing, each with the exact action to take.
 - **Landed** — what merged, with PR links, and the tickets closed.
-- **Next** — whether it's safe to start the next session, and the exact command for the next piece of work, such as the next frontier ticket on a wayfinder map.
+- **Next** — whether it's safe to start the next session, and the exact command for the next piece of work, such as the next frontier ticket on a wayfinder map. After a wave from [orchestrate](../engineering/orchestrate.md), that is `/clear` and then the next wave; a wave's branches merge in ticket order, then smallest diff first.
 
 ## Common questions
 

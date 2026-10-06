@@ -33,6 +33,14 @@ Code, ADRs, docs, research findings and prototypes all land on `<default>` by PR
 
 `/close` does steps 2–5 at the end of a session.
 
+## Parallel waves
+
+Two or more independent tickets run as one workflow (`/orchestrate`), each builder in its own worktree, stopping before merge; one `/close` lands the wave.
+
+- **Worktree setup:** `<setup-command>` before the definition of done will pass in a fresh worktree.
+- **Hotspots:** `<hotspot-files>` — tickets that touch the same one go in different waves.
+- **Risky areas** (reviewed by an opus reviewer before landing): `<risky-areas>`.
+
 ## The sweep
 
 Run after every merge, and at the start of any session that pulls `<default>`:

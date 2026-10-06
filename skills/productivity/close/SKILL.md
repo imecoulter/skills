@@ -35,7 +35,7 @@ Done when every finish item is pushed or re-tagged.
 
 Before a branch is merged, run the repo's **definition of done** against it — its documented check command (e.g. `npm run check`, named in `docs/agents/git-workflow.md`, the coding standards or `AGENTS.md`), otherwise its typecheck and test suite. This is the gate that counts when PRs have no checks of their own. A failure in this session's work is a finish item: fix it and re-run. A check has passed only when you've seen its results; exit code 0 with no results shown is not a pass.
 
-Every **merge** branch goes into the default branch. Follow the repo's documented workflow (`docs/agents/git-workflow.md` or equivalent) if one exists; otherwise:
+Every **merge** branch goes into the default branch — a wave's branches in ticket order, then smallest diff first, re-running the definition of done on each after the one before it lands. Follow the repo's documented workflow (`docs/agents/git-workflow.md` or equivalent) if one exists; otherwise:
 
 - **Has a PR** → merge it through the PR.
 - **No PR, repo has a remote** → push the branch, open a PR (`gh pr create`), and merge it through the PR.
@@ -69,4 +69,4 @@ Lead with what the user has to act on. Keep it to this session, a line per item,
 
 - **⚠ Needs you** — first, whenever it isn't empty. Every item handed back, and anything that went wrong while closing (a check that failed, a sweep that refused, a merge you couldn't make): what it is, why, and the exact action the user should take.
 - **Landed** — what merged into the default branch, with PR links (or the merge commit when merged locally), and the tickets closed.
-- **Next** — whether it's safe to start the next session now: everything landed and each primary checkout clean on its default branch, or what still stands in the way. Then the next piece of work and the exact command to start it — the first frontier ticket on the wayfinder map or ticket set this session worked from (`/wayfinder <map>`, `/build #<n>`), or what the user said comes next. When it isn't clear, name the candidates rather than picking one.
+- **Next** — whether it's safe to start the next session now: everything landed and each primary checkout clean on its default branch, or what still stands in the way. Then the next piece of work and the exact command to start it — the first frontier ticket on the wayfinder map or ticket set this session worked from (`/wayfinder <map>`, `/build #<n>`), or what the user said comes next. After a wave, the next move is `/clear` (the tickets carry the context), then the next wave. When it isn't clear, name the candidates rather than picking one.

@@ -54,7 +54,7 @@ Yes, through the merge. The PR carries `Closes #<n>`, and [close](../productivit
 
 **Can I point it at all my tickets at once, or run several in parallel?**
 
-One invocation, one ticket. Parallel is fine across sessions: each run works in its own worktree, so side-by-side `/build` sessions don't share an index or HEAD. [to-tickets](to-tickets.md) prints the tickets in waves, and every ticket in a wave can run in its own session. The git stash is still shared across worktrees, so no run should rely on it.
+One invocation, one ticket. Two or more ready tickets are a wave, and [orchestrate](orchestrate.md) runs a wave as one workflow: a Sonnet builder per ticket, each in its own worktree doing this skill's steps up to the review and stopping before merge, then one `/close` lands them in ticket order. The git stash is still shared across worktrees, so no run should rely on it.
 
 **Can I stop it before it merges?**
 
