@@ -51,8 +51,8 @@ Count units against CORE.md's mode table, then:
 
 ## 6. Recipes
 
-- **Ticket wave:** [scout] → `pipeline(ticket → builder, worktree, §4)` → the script builds the summary → [opus reviewer runs `/code-review` read-only on base...branch for each risky ticket] → §5.
+- **Ticket wave:** [scout] → `pipeline(ticket → builder, worktree, §4)` → the script builds the summary → [opus reviewer runs `/code-review` read-only on base...branch for each risky ticket] → §5. This recipe ships as the saved workflow `/imecoulter-skills:ticket-wave` — run it with the wave's ticket numbers (`risky:` before a risky one) instead of writing a new script.
 - **PR sweep** (2+ PRs; one PR is one subagent): `pipeline(pr → sonnet/medium in a worktree: check out the PR, run the definition of done; if red, return red; else /code-review against the PR base)` → `{pr, red, standards{n,worst}, spec{n,worst}|skipped}`.
 - **Hard bug:** `/diagnosing-bugs` phases 1–3 inline (red loop, minimise, hypotheses) → `parallel(hypothesis → sonnet/medium, worktree, change one variable, run the red loop)` → `{id, held: yes|no|unclear, evidence ≤3}` → fix and regression test inline. A regression between two known-good states gets `git bisect run` with no agents.
 - **Wide refactor:** the expand step inline (`/build`, `/close`) → `pipeline(batch sized by blast radius → sonnet/low, worktree)` → `{batch, branch, sites, checks}` → `/close` in order → the contract step inline.
-- **Sweep or research:** `pipeline(dir or source → haiku finder/reader)` → `[{loc, quote, issue|claim}]` → dedupe in the script → one sonnet/medium writer (fixes, a doc, or the cited research file) → `{path, n, open ≤3}`. The agents do `/research`'s reading themselves rather than each launching `/research`.
+- **Sweep or research:** `pipeline(dir or source → haiku finder/reader)` → `[{loc, quote, issue|claim}]` → dedupe in the script → one sonnet/medium writer (fixes, a doc, or the cited research file) → `{path, n, open ≤3}`. The agents do `/research`'s reading themselves rather than each launching `/research`. Reserve the bundled `/deep-research` workflow for open-web questions that need cross-checking.

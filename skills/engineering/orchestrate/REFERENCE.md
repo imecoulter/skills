@@ -136,10 +136,14 @@ Sources: the Claude Code docs and CHANGELOG through v2.1.290, checked Oct 5, 202
 - **Caching:** agents that match on model, effort, agent type, tools, schema and directory share a prompt-cache prefix. Workflow agents get a 5-minute cache TTL even on a subscription. Switching models busts the cache; changing effort doesn't on Opus/Sonnet 5.5.
 - **Price weights:** the API prices under *Models and effort* are a proxy for how fast usage drains, nothing more. Thinking bills as output, and Anthropic doesn't publish how subscriptions weight each model.
 
-## Still unverified — confirm during the first pilot
-- Whether workflow agents can call the Skill tool. The fallback of reading SKILL.md by absolute path is in the orchestrate skill.
-- Whether workflow worktrees honor `worktree.baseRef`.
-- Whether worktree isolation works on these Windows repos.
+## Verified in the first pilot (Oct 5, 2026, imecoulter/skills#7)
+- **Workflow agents can call the Skill tool.** The builder ran `build` and `code-review` by name (`skillTool: used`); the read-SKILL.md-by-path fallback stays in the prompt for harnesses where they can't.
+- **Worktree isolation works on Windows.** The agent got `.claude/worktrees/wf_<run>-<n>`, renamed its branch to the repo convention, and the worktree was kept after the run for landing.
+- **A small ticket on one Sonnet/medium builder:** 71.5k tokens, 15 tool calls, 99 s, green on the first pass.
+- **A user `CLAUDE.md` written mid-session doesn't reach that session's agents** (`coreRules: false`): CLAUDE.md files and their imports load at launch, and agents get the session's set. New sessions load it. User-scope imports need no approval dialog (except in Cowork).
+
+## Still unverified
+- Whether workflow worktrees honor `worktree.baseRef`. The pilot started at the commit that was both local `HEAD` and `origin/main`, so it couldn't tell; the next run launched with local `main` behind `origin/main` settles it.
 - Haiku 5.5 is announced "in the coming weeks" and Haiku 4.5's earliest retirement date is Oct 15, 2026, so the `haiku` alias will likely move to 5.5. Pin `claude-haiku-4-5-20251001` only if you specifically want 4.5.
 
 ## Sources
