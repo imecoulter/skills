@@ -17,9 +17,7 @@ Skills, docs pages, manifests and ADRs all land on `main` by PR. Nothing ever li
 
 ## Definition of done
 
-`claude plugin validate . --strict` (the marketplace manifest), then `claude plugin validate .claude-plugin/plugin.json` (the plugin and every skill it ships; its one standing warning, `CLAUDE.md` at the plugin root, is expected, which is why this one runs without `--strict`). A check has passed only when you've seen its results. Then confirm by reading: every promoted skill is in `README.md`, its bucket `README.md` and `.claude-plugin/plugin.json`, its docs page exists, and `ask` still routes to it (the rules are in `CLAUDE.md`).
-
-`npm run check-plugin-version` is upstream's changesets check and fails by design here: the plugin version carries an `-imecoulter.N` suffix that `package.json` doesn't.
+`claude plugin validate . --strict` (the marketplace manifest), then `claude plugin validate .claude-plugin/plugin.json` (the plugin and every skill it ships; its one standing warning, `CLAUDE.md` at the plugin root, is expected, which is why this one runs without `--strict`), then `npm run check-plugin-version` (the plugin version must be `<package.json version>-imecoulter.<N>`). A check has passed only when you've seen its results. Then confirm by reading: every promoted skill is in `README.md`, its bucket `README.md` and `.claude-plugin/plugin.json`, its docs page exists, and `ask` still routes to it (the rules are in `CLAUDE.md`).
 
 **PRs have no checks** (the only workflow is `upstream-watch.yml`). Green is the local run above, so run it before opening the PR, not after.
 

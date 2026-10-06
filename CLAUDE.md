@@ -34,4 +34,4 @@ Single-context: `CONTEXT.md` at the repo root, ADRs in `.agents/adr/`. See `docs
 
 ### Git workflow
 
-Every branch gets its own worktree under `.claude/worktrees/`; the primary checkout stays on a clean `main`. Every branch lands by PR and merges on green, where green is `claude plugin validate . --strict` plus a non-strict validate of `.claude-plugin/plugin.json`. See `docs/agents/git-workflow.md`.
+Every branch gets its own worktree under `.claude/worktrees/`; the primary checkout stays on a clean `main`. Every branch lands by PR and merges on green, where green is `claude plugin validate . --strict` plus a non-strict validate of `.claude-plugin/plugin.json`, plus `npm run check-plugin-version`. See `docs/agents/git-workflow.md`.
