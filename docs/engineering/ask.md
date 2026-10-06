@@ -40,7 +40,7 @@ The other idea it hands you is the **phase boundary**. A phase is a chunk of wor
 | **Continue** | The next phase wants this one verbatim, or you have smart zone left. It is the only move that keeps the session as a primary source, so rule it out first |
 | **`/clear`** | Everything behind you is disposable. Cheapest move on the board, and one-way if you were wrong |
 | **[handoff](../productivity/handoff.md)** | Something has to travel: a new harness, a new directory, a colleague, a side task forked mid-phase |
-| **Subagent** | The task is scoped tightly enough to run with you away from the keyboard |
+| **Subagent** | The task is scoped tightly enough to run with you away from the keyboard. Two or more such tasks are one workflow run, with models picked by [orchestrate](orchestrate.md) |
 | **`/compact`** | None of the above. The default, and it lands here often |
 
 Two of those are routinely got wrong, which is why the router carries the order rather than the list. `/handoff` reads like the general bridge between windows and is not: portability is the whole of what it buys. `/compact` is the bottom of the tree rather than the first reach, because the four questions above it are each cheaper or more precise.

@@ -21,3 +21,17 @@ Every `SKILL.md` is either user-invoked (`disable-model-invocation: true` plus `
 [`ask`](./skills/engineering/ask/SKILL.md) is the router that maps every user-reachable skill and how they relate. The same trigger that re-syncs a docs page applies to it: whenever you add, rename, remove, or change how a user-reachable skill fits the flows, re-read `ask`'s `SKILL.md` and update it so the map stays accurate — a new skill it never mentions, or a stale one it still routes to, is a router that lies.
 
 To (re)link every skill into the local harness skill directories (`~/.claude/skills`, `~/.agents/skills`), run `scripts/link-skills.sh`. Each entry is a symlink into this repo, so a `git pull` keeps installed skills current; re-run the script after adding, removing, or renaming a skill.
+
+## Agent skills
+
+### Issue tracker
+
+Issues live as GitHub issues on `imecoulter/skills`, via the `gh` CLI. See `docs/agents/issue-tracker.md`.
+
+### Domain docs
+
+Single-context: `CONTEXT.md` at the repo root, ADRs in `.agents/adr/`. See `docs/agents/domain.md`.
+
+### Git workflow
+
+Every branch gets its own worktree under `.claude/worktrees/`; the primary checkout stays on a clean `main`. Every branch lands by PR and merges on green, where green is `claude plugin validate . --strict` plus a non-strict validate of `.claude-plugin/plugin.json`. See `docs/agents/git-workflow.md`.

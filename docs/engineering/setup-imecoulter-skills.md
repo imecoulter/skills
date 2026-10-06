@@ -34,7 +34,7 @@ It leads each section with the recommended answer, and skips whatever exploratio
 | **Issue tracker** | the one matching your `git remote` | always — this is the one real choice |
 | **Triage labels** | keep the five canonical names (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`) | only if the `triage` skill is installed |
 | **Domain docs** | single-context: one `CONTEXT.md` plus `docs/adr/` at the root | only if it spots monorepo signals, and then it offers a multi-context `CONTEXT-MAP.md` |
-| **Git workflow** | a worktree per branch, every branch landing by PR and merging on green, then the sweep | to confirm the **definition of done** (the one command that says a change is finished) and whether PRs run checks of their own |
+| **Git workflow** | a worktree per branch, every branch landing by PR and merging on green, then the sweep | to confirm the **definition of done** (the one command that says a change is finished), whether PRs run checks of their own, and what a parallel wave from [orchestrate](orchestrate.md) needs: the worktree setup command, the hotspot files, and the risky areas |
 
 The git workflow matters most when PRs run no CI, which is common when you're saving Actions minutes. Then "green" can only mean the local definition of done, and writing that down is what lets [build](build.md) and [close](../productivity/close.md) merge safely instead of merging on the absence of checks.
 
@@ -87,7 +87,7 @@ One long-standing complaint says yes, in these words: *"having a skill to set up
 ## It's working if
 
 - `docs/agents/issue-tracker.md`, `docs/agents/domain.md` and `docs/agents/git-workflow.md` exist, plus `triage-labels.md` if `triage` is installed.
-- `git-workflow.md` names a real check command, and says whether PRs run checks.
+- `git-workflow.md` names a real check command, says whether PRs run checks, and fills its `## Parallel waves` section.
 - An `## Agent skills` section appears in the instruction file your harness actually reads, with a one-line summary pointing at each of those files.
 - The tracker it proposed matches the remote you really use, and the label strings match labels that really exist in your tracker.
 - Afterwards, `/to-tickets` publishes without asking you where issues live, and `/triage` applies labels rather than inventing them.

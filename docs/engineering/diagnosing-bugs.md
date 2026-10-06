@@ -47,7 +47,7 @@ The phases are gates, not a checklist. Each one refuses to open until something 
 | --- | --- |
 | Into Phase 2 | A named command, already run and pasted with its output, that can go red on this bug |
 | Into Phase 3 | The repro is reproduced *and* minimised — every remaining element is load-bearing |
-| Into Phase 4 | 3–5 ranked, falsifiable hypotheses exist, each stating its prediction, shown to you before any is tested |
+| Into Phase 4 | 3–5 ranked, falsifiable hypotheses exist, each stating its prediction, shown to you before any is tested. Two or more that each change one independent variable can be tested in parallel through [orchestrate](orchestrate.md); a regression between two known-good states goes straight to `git bisect run` |
 | Into Phase 5 | Probes map to a specific prediction, one variable at a time, every debug log tagged `[DEBUG-a4f2]`-style so cleanup is one grep |
 | Done | Original repro no longer reproduces, instrumentation gone, and the hypothesis that turned out correct is written into the commit message |
 
