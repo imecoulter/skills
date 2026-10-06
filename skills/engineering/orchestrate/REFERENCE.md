@@ -141,9 +141,9 @@ Sources: the Claude Code docs and CHANGELOG through v2.1.290, checked Oct 5, 202
 - **Worktree isolation works on Windows.** The agent got `.claude/worktrees/wf_<run>-<n>`, renamed its branch to the repo convention, and the worktree was kept after the run for landing.
 - **A small ticket on one Sonnet/medium builder:** 71.5k tokens, 15 tool calls, 99 s, green on the first pass.
 - **A user `CLAUDE.md` written mid-session doesn't reach that session's agents** (`coreRules: false`): CLAUDE.md files and their imports load at launch, and agents get the session's set. New sessions load it. User-scope imports need no approval dialog (except in Cowork).
+- **Workflow worktrees branch from the remote default branch.** A probe launched from a clone whose local `main` sat one commit behind `origin/main`, with `worktree.baseRef` unset, started its worktree at `origin/main` — the subagent rule holds for workflow agents. So a wave starts from what's pushed, never from local unpushed commits; set `worktree.baseRef: "head"` only when a run must build on local work.
 
 ## Still unverified
-- Whether workflow worktrees honor `worktree.baseRef`. The pilot started at the commit that was both local `HEAD` and `origin/main`, so it couldn't tell; the next run launched with local `main` behind `origin/main` settles it.
 - Haiku 5.5 is announced "in the coming weeks" and Haiku 4.5's earliest retirement date is Oct 15, 2026, so the `haiku` alias will likely move to 5.5. Pin `claude-haiku-4-5-20251001` only if you specifically want 4.5.
 
 ## Sources

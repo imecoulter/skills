@@ -22,7 +22,7 @@ Done when you've printed an ops header of 6 lines or fewer covering: version, ac
 Count units against CORE.md's mode table, then:
 
 - **Stay inline** even for big work when several units edit the same hotspot file, there's no definition of done, the seams aren't agreed, the repo isn't git (Perforce), or worktree setup dominates (Unreal projects, heavy installs).
-- Workflow worktrees branch from the remote default branch unless `worktree.baseRef` is `"head"` — which is why a wave starts only after the previous one is pushed.
+- Workflow worktrees branch from the remote default branch unless `worktree.baseRef` is `"head"` (verified) — which is why a wave starts only after the previous one is pushed.
 - If workflows are unavailable (off on Pro until enabled, or disabled by an admin), launch the same stages as subagents with explicit models.
 
 ## 3. Announce, then pilot
